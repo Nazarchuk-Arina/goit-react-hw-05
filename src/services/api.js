@@ -1,8 +1,20 @@
 import axios from "axios";
 
-export const fetchImages = async (query, page) => {
-  const response = await axios.get(
-    `https://api.unsplash.com/search/photos/?client_id=CYU9zJmCfjDkQMyQvN4_nWCb1zdRsEWiJs1H7UKCcVM&query=${query}&page=${page}&orientation=landscape`
+export const getTrendingMovies = async () => {
+  const options = {
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZmYxZTkwMTcyYzA1YWYyZmM2MmNmOWJmZTIzNDkxMyIsIm5iZiI6MTczMjI4ODEwMi4zNDc4NjIsInN1YiI6IjY3M2ZiZDI4OGI0ZTRjMmVmNmY3NzI4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-rgIQw1BWZ3ZhxjOV5k7yhSpxOIRbO4aDmKUIvnGLAE",
+    },
+  };
+
+  const { data } = axios.get(
+    "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+    options
   );
-  return response.data;
+
+  return data.results;
 };
+
+export default getTrendingMovies;
