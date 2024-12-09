@@ -1,30 +1,26 @@
+import { Link, Outlet } from "react-router-dom";
+import MovieDetails from "../../components/MovieDetails/MovieDetails";
+import s from "./MoviesDetails.module.css";
+import { Suspense } from "react";
+import Loader from "../../components/Loader/Loader";
+
 const MoviesDetails = () => {
-  // const { userId } = useParams();
-  // const [user, setUser] = useState([]);
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await fetchMoviesById(userId);
-  //     setUser(data);
-  //   };
-
-  //   getData();
-  // }, [userId]);
-
-  // if (!user) {
-  //   return <h2>loading</h2>;
-  // }
-
-  return; // <div>
-  //   <img src={user.image} />
-  //   <h2>
-  //     {user.firstName} {user.lastName}
-  //   </h2>
-  //   <nav>
-  //     <Link to="cast">Cast</Link>
-  //     {/* <Link to="reviews">Reviews</Link> */}
-  //   </nav>
-  // </div>
+  return (
+    <div className={s.inner}>
+      <MovieDetails />
+      <ul className={s.cont}>
+        <li className={s.item}>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li className={s.item}>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
+    </div>
+  );
 };
 
 export default MoviesDetails;

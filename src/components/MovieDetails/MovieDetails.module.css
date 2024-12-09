@@ -1,0 +1,29 @@
+.back {
+  margin-bottom: 20px;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  min-width: 91px;
+  height: 40px;
+  background: #545558;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  border: none;
+}
+
+.info {
+  margin-left: 15px;
+}
+
+.written {
+  font-weight: 800;
+}
+
+.title {
+  color: red;
+}
+.overview {
+  font-weight: normal;
+}

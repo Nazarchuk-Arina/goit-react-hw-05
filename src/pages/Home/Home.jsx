@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import getTrendingMovies from "../../services/api";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import MovieList from "../../components/MovieList/MovieList";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const getData = async () => {
-      const data = await getTrendingMovies();
-      setMovies(data);
+      try {
+        const data = await getTrendingMovies();
+        setMovies(data);
+      } catch (error) {
+        setError(true);
+      }
     };
     getData();
   }, []);
@@ -15,15 +23,8 @@ const Home = () => {
   return (
     <div>
       <h1>Trending movies</h1>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={movie.id.toString()}>
-              <p>{movie.title}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {error && <ErrorMessage />}
+      <MovieList movies={movies} />
     </div>
   );
 };

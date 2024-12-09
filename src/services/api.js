@@ -9,7 +9,7 @@ export const getTrendingMovies = async () => {
     },
   };
 
-  const { data } = axios.get(
+  const { data } = await axios.get(
     "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
     options
   );

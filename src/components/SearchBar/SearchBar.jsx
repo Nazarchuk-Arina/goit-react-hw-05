@@ -1,34 +1,31 @@
 import { Formik, Form, Field } from "formik";
 import s from "./SearchBar.module.css";
-import toast from "react-hot-toast";
+import { useState } from "react";
 
-const SearchBar = ({ onChangeQuery }) => {
-  const initialValues = {
-    query: "",
+const SearchBar = ({ onSubmit }) => {
+  const [input, setInput] = useState("");
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
   };
 
-  const handleSubmit = (values) => {
-    if (values.query === "") {
-      return toast.error("Please enter a search query!", {
-        duration: 3000,
-        position: "top-right",
-      });
-    }
-    onChangeQuery(values.query);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return alert("Please enter a value!");
+    onSubmit(input);
   };
+
   return (
-    <header className={s.form}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
-          <Field
-            name="query"
-            placeholder="Search images and photos"
-            className={s.input}
-          />
-          <button type="submit">Search</button>
-        </Form>
-      </Formik>
-    </header>
+    <form onSubmit={handleSubmit} className={s.form}>
+      <input
+        className={s.input}
+        value={input}
+        onChange={handleChange}
+        placeholder="Search movies..."
+        autoFocus
+      />
+      <button type="submit">Search</button>
+    </form>
   );
 };
 

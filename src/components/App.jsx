@@ -1,31 +1,37 @@
 import "/main.css";
 import "modern-normalize";
+import { Suspense, lazy } from "react";
+import Loader from "./Loader/Loader";
 import { Route, Routes } from "react-router-dom";
-import Header from "./Header/Header";
-import Home from "../pages/Home/Home";
-import Movies from "../pages/Movies/Movies";
-import MoviesDetails from "../pages/MoviesDetails/MoviesDetails";
-import MovieCast from "../components/MovieCast/MovieCast";
-import MovieReviews from "../components/MovieReviews/MovieReviews";
-import NotFound from "../pages/NotFound/NotFound";
+const Header = lazy(() => import("./Header/Header"));
+const Home = lazy(() => import("../pages/Home/Home"));
+const Movies = lazy(() => import("../pages/Movies/Movies"));
+const MoviesDetails = lazy(() =>
+  import("../pages/MoviesDetails/MoviesDetails")
+);
+const MovieCast = lazy(() => import("./MovieCast/MovieCast"));
+const MovieReviews = lazy(() => import("./MovieReviews/MovieReviews"));
+const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
-const App = () => {
+function App() {
   return (
     <div>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
 
-        <Route path="/movies/:userId" element={<MoviesDetails />}>
-          <Route path="cast" element={<MovieCast />} />
-          {/* <Route path="reviews" element={<MovieReviews />} /> */}
-        </Route>
+          <Route path="/movies/:movieId" element={<MoviesDetails />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </div>
   );
-};
+}
 
 export default App;

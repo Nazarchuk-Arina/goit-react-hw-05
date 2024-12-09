@@ -1,3 +1,7 @@
+.form {
+  margin-top: 40px;
+}
+
 .form button {
   color: #fff;
   border-radius: 8px;
@@ -13,7 +17,7 @@
 }
 .input {
   width: 202px;
-  height: 25px;
+  height: 40px;
   padding: 8px 16px;
   border-radius: 8px;
   font-weight: 400;
