@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import MovieDetails from "../../components/MovieDetails/MovieDetails";
-import s from "./MoviesDetails.module.css";
+import s from "./MovieDetailsPage.module.css";
 import { Suspense } from "react";
 import Loader from "../../components/Loader/Loader";
 
